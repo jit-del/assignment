@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>Display</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% if data %}
+    <h1 style="text-align: center">Your Note</h1>
+<a href="/index/">Home</a>
+    <form class="inline-group" style="float: right" action="/filter/" method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="Id here.." name="id">
+    <input type="date" placeholder="date" name="date">
+    <input type="submit" value="Filter" class="btn" style="background-color: aquamarine;height: 35px;margin-right: 10px">
+    </form>
+    <hr>
+{% for msg in messages %}
+    <p style="color: green;text-align: center">{{ msg }}</p>
+{% endfor %}
+    {% if data.msg %}
+            <p style="text-align: center;color: red">{{ data.msg }}</p>
+            {% else %}
+        {% for i in data %}
+            <div class="container shadow p-4" style="background-color: whitesmoke;margin-top: 20px">
+            <b style="text-decoration: underline">{{ i.fields.username }}</b><p style="float: right">Id : {{ i.pk }}</p><br>
+            <p style="color: green;width: 300px"><a style="text-decoration: none" href="/updateshow{{i.pk}}/">{{ i.fields.note }}</a></p>
+            <small>Last Updated : {{ i.fields.updatedate }}</small>
+            </div>
+{% endfor %}
+        {% endif %}
+        {% endif %}
+{% if udata %}
+        <h1 style="text-align: center">Update Your Note</h1>
+<a href="/index/">Home</a><hr>
+{% for msg in messages %}
+    <p style="color: green;text-align: center">{{ msg }}</p>
+{% endfor %}
+    <div class="jumbotron">
+    <center>
+    {% if udata.msg %}
+            <p style="text-align: center;color: red">{{ udata.msg }}</p>
+            {% else %}
+    {% for i in udata %}
+<form action="/update{{i.pk}}/" method="post" class="form-horizontal">
+{% csrf_token %}
+    <textarea name="note" class="form-control" style="height: 300px">{{ i.fields.note }}</textarea>
+<input type="submit" value="update" class="btn btn-warning">
+</form>
+    {% endfor %}
+    {% endif %}
+    </center>
+    </div>
+{% endif %}
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1 style="text-align: center">Login Here</h1><hr>
+<center>
+<div class="col-lg-3">
+    <form class="form-horizontal" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <b>Username: </b><input type="text" class="form-control" name="username"><br>
+        <b>Password: </b><input type="password" class="form-control" name="password">
+        <p style="color: red">{{ msg }}</p>
+        <input type="submit" value="Login" class="btn btn-outline-success">
+    </form>
+</div>
+</center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
